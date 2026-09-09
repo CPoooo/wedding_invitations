@@ -18,20 +18,24 @@
 
 @theme {
   /* ── paper (four-step ramp, lightest → darkest) ── */
-  --color-surface:        #ece4cf;  /* page */
-  --color-surface-raised: #f7f3e8;  /* cards, letter, seal — lightest */
-  --color-surface-deep:   #dcd0b0;  /* panels, envelope body */
-  --color-surface-sunk:   #cdc09c;  /* envelope interior, shadow folds */
+  --color-surface: #ece4cf; /* page */
+  --color-surface-raised: #f7f3e8; /* cards, letter, seal — lightest */
+  --color-surface-deep: #dcd0b0; /* panels, envelope body */
+  --color-surface-sunk: #cdc09c; /* envelope interior, shadow folds */
+
+  /* ── sage (board badges — the sticker green) ── */
+  --color-sage: #a9b5a0;
+  --color-sage-deep: #97a58e;
 
   /* ── photo wells (NEUTRAL — deliberately not beige) ── */
-  --color-well:           #f1f0ec;  /* barely not white */
+  --color-well: #f1f0ec; /* barely not white */
 
   /* ── ink (near-black, heavy) ───────────── */
-  --color-ink:      #191712;
+  --color-ink: #191712;
   --color-ink-soft: #3e392c;
 
   /* ── hunter green (primary) ────────────── */
-  --color-accent:      #355e5b;
+  --color-accent: #355e5b;
   --color-accent-deep: #254441;
   --color-wine-deep: #471a25;
 
@@ -40,7 +44,7 @@
   --color-wine: #5e2233;
 
   /* ── hairlines ─────────────────────────── */
-  --color-line:        #d8cfb8;
+  --color-line: #d8cfb8;
   --color-line-strong: #bfb394;
 
   /* ── typography ────────────────────────── */
@@ -70,13 +74,13 @@ body::after {
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;    /* fallback */
-  height: 100lvh;   /* explicit "largest viewport" — wins where supported */
+  height: 100vh; /* fallback */
+  height: 100lvh; /* explicit "largest viewport" — wins where supported */
   z-index: -2;
   pointer-events: none;
   background-image: url("/images/landscape.jpg");
   background-size: cover;
-  background-position: center;   /* bias the focus if needed, e.g. "center 30%" */
+  background-position: center; /* bias the focus if needed, e.g. "center 30%" */
 }
 
 /* faint paper grain — lays over the photo, keeps everything tactile
@@ -111,9 +115,9 @@ body::before {
    sits directly on the photo (letterheads, section titles, CTAs).
    Content panels stay opaque — they never need this. */
 @utility text-halo {
-  text-shadow:
-    0 1px 1px color-mix(in srgb, var(--color-surface-raised) 90%, transparent),
-    0 0 8px  color-mix(in srgb, var(--color-surface-raised) 80%, transparent),
+  text-shadow: 0 1px 1px
+      color-mix(in srgb, var(--color-surface-raised) 90%, transparent),
+    0 0 8px color-mix(in srgb, var(--color-surface-raised) 80%, transparent),
     0 0 20px color-mix(in srgb, var(--color-surface-raised) 55%, transparent),
     0 0 44px color-mix(in srgb, var(--color-surface-raised) 35%, transparent);
 }

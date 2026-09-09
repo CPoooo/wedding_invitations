@@ -22,12 +22,13 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [] on mobile (probably on desktop too) background image jumps around when scrolling up or down
 
 # More components to add
-[] our story component
-[] frequently asked questions component
 [] "THE DETAILS" component: will have all the details of the wedding itself. Location, time, attire, theme, etc... 
     [] could even include "ask a question section" - emails Rachel & I the question? 
+    [] details
+[] our story
+[] FAQ
 [] song component that is a record? 
-[] countdown component that is live and counting down 
+[x] countdown component that is live and counting down 
 
 # RSVP Page
 [x] RSVP page aesthetics and form needs to be completed

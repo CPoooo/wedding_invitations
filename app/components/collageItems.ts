@@ -71,36 +71,4 @@ export const collageItems: CollageItem[] = [
         id: "12", kind: "sticker", src: "/images/sticker-coffee.png",
         width: "w-24", rotation: -6,
     },
-    {
-        id: "13", kind: "photo", alt: "", variant: "pad", padColor: "#e8c4c4",
-        aspect: "aspect-[3/4]", rotation: 1,
-    },
-    {
-        id: "14", kind: "photo", alt: "", variant: "bare",
-        aspect: "aspect-[4/5]", rotation: -2,
-    },
-    {
-        id: "15", kind: "photo", alt: "", variant: "polaroid",
-        aspect: "aspect-square", rotation: 3, caption: "save the date",
-    },
-    {
-        id: "16", kind: "photo", alt: "", variant: "polaroid",
-        aspect: "aspect-[5/7]", rotation: -4, tape: "corner", caption: "golden hour",
-    },
-    {
-        id: "17", kind: "sticker", src: "/images/sticker-coffee.png",
-        width: "w-24", rotation: -6,
-    },
-    {
-        id: "18", kind: "photo", alt: "", variant: "pad", padColor: "#e8c4c4",
-        aspect: "aspect-[3/4]", rotation: 1,
-    },
-    {
-        id: "19", kind: "photo", alt: "", variant: "bare",
-        aspect: "aspect-[4/5]", rotation: -2,
-    },
-    {
-        id: "20", kind: "photo", alt: "", variant: "polaroid",
-        aspect: "aspect-square", rotation: 3, caption: "save the date",
-    },
 ];
