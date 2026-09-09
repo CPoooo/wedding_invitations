@@ -46,7 +46,7 @@ export function SectionBadge({ item, index, open, revealed }: {
                 aria-label={`${item.kicker} ${item.title}`}
                 className="group relative block w-44 md:w-52"
             >
-                <svg viewBox="0 0 200 200" className="block w-full drop-shadow-[0_14px_24px_rgba(25,23,18,0.3)]">
+                <svg viewBox="-20 -20 240 240" className="block w-full drop-shadow-[0_14px_24px_rgba(25,23,18,0.3)]">
                     <path d={OUTER} className="fill-sage transition-colors duration-300 group-hover:fill-sage-deep" />
                     <path d={INNER} fill="none" stroke="var(--color-surface-raised)" strokeOpacity="0.55" strokeWidth="1.5" />
                 </svg>
