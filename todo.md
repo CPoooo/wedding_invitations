@@ -1,11 +1,16 @@
 # Todoooooo
 [] get er done
 
+# brain
+[] update project brain
+
+
 # Guest list
 [] only users that are only Rachel and I's guest list should be allowed into the website
 [] can do this with a preset list in the db possibly by name or email, or we can just send the email with the website link out to everyone on our list we make via email, and they just put in a default password we give them, something like 'supercoolpasswordtopoolwedding2027'
 
 # Misc
+[] update favicon
 [x] fix double rendering of "Rachel & Cameron": there is a Rachel & Cameron on both the page.tsx
 as well as on the envelope message itself. Either replace the envelope one with a different message or something,
 or just hide the Rachel & Cameron that you should see after opening the envelope (until envelope is open, aka should not be viewed from the landing page)
