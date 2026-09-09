@@ -168,8 +168,8 @@ export default function RsvpPage() {
                         <p className="text-center font-display text-sm italic text-wine">{state.message}</p>
                     )}
 
-                    <p className="text-center font-display text-sm italic text-ink-soft">
-                        Kindly reply by May 1st
+                    <p className="text-center font-display text-md italic text-ink-soft">
+                        Kindly reply by May 1, 2027
                     </p>
                 </form>
             </motion.div>
