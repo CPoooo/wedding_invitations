@@ -1,58 +1,211 @@
 "use client";
-import { useState } from "react";
 
-// can we just make this into a Server Action? 
+import { useActionState, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { submitRsvp, type RsvpState } from "./actions";
+
+const rise = (delay: number) => ({
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.55, delay, ease: "easeOut" as const },
+});
 
 export default function RsvpPage() {
-  const [attending, setAttending] = useState<boolean | null>(null);
-  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+    const [state, formAction, isPending] = useActionState<RsvpState, FormData>(
+        submitRsvp,
+        { status: "idle" },
+    );
+    const [attending, setAttending] = useState<boolean | null>(null);
+    const [guestCount, setGuestCount] = useState(1);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    setStatus("sending");
-    const res = await fetch("/api/rsvp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.get("name"),
-        attending: attending === true,
-        guestCount: Number(form.get("guestCount") ?? 1),
-        guestNames: form.getAll("guestName").filter(Boolean),
-        dietaryRestrictions: form.get("dietaryRestrictions"),
-        message: form.get("message"),
-      }),
-    });
-    setStatus(res.ok ? "done" : "error");
-  }
+    if (state.status === "success") return <ThankYou attending={state.attending} />;
 
-  if (status === "done") return <p className="grid min-h-screen place-items-center text-2xl">Thank you! 💌</p>;
+    const extras = attending === true ? Math.min(Math.max(guestCount, 1), 6) - 1 : 0;
 
-  return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-4 p-8">
-      <input name="name" required placeholder="Your name" className="w-full border p-2" />
+    return (
+        <main className="min-h-screen px-6 py-16 md:py-24">
+            {/* ── letterhead ─────────────────────────── */}
+            <motion.header {...rise(0)} className="mx-auto max-w-lg text-center">
+                <div className="mx-auto grid h-16 w-12 place-items-center rounded-[50%] border border-line-strong bg-surface-raised shadow-[0_8px_18px_-8px_rgba(44,42,34,0.45)]">
+                    <span className="font-monogram text-lg leading-none text-accent">R&amp;C</span>
+                </div>
+                <p className="eyebrow mt-8 text-ink-soft">Répondez s&apos;il vous plaît</p>
+                <h1 className="mt-3 font-display text-5xl italic text-ink md:text-6xl">
+                    Rachel &amp; Cameron 
+                </h1>
+                <Ornament />
+            </motion.header>
 
-      <div className="flex gap-4">
-        <button type="button" onClick={() => setAttending(true)}  className={attending === true ? "underline" : ""}>Joyfully accepts</button>
-        <button type="button" onClick={() => setAttending(false)} className={attending === false ? "underline" : ""}>Regretfully declines</button>
-      </div>
+            {/* ── the reply card ─────────────────────── */}
+            <motion.div
+                {...rise(0.15)}
+                className="relative mx-auto mt-12 max-w-lg border border-line-strong/60 bg-surface-raised px-7 py-10 shadow-[0_30px_70px_-40px_rgba(44,42,34,0.45)] md:px-12"
+            >
+                {/* inner hairline — the double-rule stationery frame */}
+                <div aria-hidden className="pointer-events-none absolute inset-2 border border-line" />
 
-      {attending === true && (
-        <>
-          <input name="guestCount" type="number" min={1} defaultValue={1} className="w-full border p-2" placeholder="Total guests (incl. you)" />
-          {/* one input per extra guest, name="guestName" — iterate up to guestCount - 1 */}
-        </>
-      )}
+                <form action={formAction} className="relative space-y-8">
+                    <input type="hidden" name="attending" value={attending === true ? "true" : "false"} />
 
-      {attending !== null && (
-        <>
-          <input name="dietaryRestrictions" placeholder="Dietary restrictions (optional)" className="w-full border p-2" />
-          <textarea name="message" placeholder="A note for the couple (optional)" className="w-full border p-2" />
-          <button disabled={status === "sending"} className="w-full bg-rose-200 p-2">
-            {status === "sending" ? "Sending…" : "Send RSVP"}
-          </button>
-        </>
-      )}
-    </form>
-  );
+                    <Field label="Your name" name="name" placeholder="Full name" required />
+
+                    {/* accept / decline */}
+                    <fieldset>
+                        <legend className="eyebrow text-ink-soft">Will you be joining us?</legend>
+                        <div className="mt-3 grid grid-cols-2 gap-3">
+                            <button
+                                type="button"
+                                onClick={() => setAttending(true)}
+                                aria-pressed={attending === true}
+                                className={toggle(attending === true, "accent")}
+                            >
+                                Joyfully accepts
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setAttending(false)}
+                                aria-pressed={attending === false}
+                                className={toggle(attending === false, "wine")}
+                            >
+                                Regretfully declines
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    {attending === true && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 14 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="space-y-8"
+                        >
+                            <label className="block">
+                                <span className="eyebrow text-ink-soft">Total guests, including yourself</span>
+                                <input
+                                    name="guestCount"
+                                    type="number"
+                                    min={1}
+                                    max={6}
+                                    value={guestCount}
+                                    onChange={(e) => setGuestCount(Number(e.target.value))}
+                                    className="mt-2 w-24 border-b border-line bg-transparent py-2 text-center font-display text-xl text-ink outline-none transition-colors focus:border-accent"
+                                />
+                            </label>
+
+                            {Array.from({ length: extras }).map((_, i) => (
+                                <Field key={i} label={`Guest ${i + 2}`} name="guestName" placeholder="Full name" />
+                            ))}
+                        </motion.div>
+                    )}
+
+                    {attending !== null && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 14 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="space-y-8"
+                        >
+                            <Field label="Dietary restrictions" name="dietaryRestrictions" placeholder="Share any allergies or needs" />
+                            <Field label="A note for the couple" name="message" placeholder="Leave a few kind words" textarea />
+                        </motion.div>
+                    )}
+
+                    {state.status === "error" && (
+                        <p className="text-center font-display text-sm italic text-wine">{state.message}</p>
+                    )}
+
+                    <button
+                        type="submit"
+                        disabled={isPending || attending === null}
+                        className="eyebrow w-full border border-accent bg-accent py-4 text-surface-raised transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                        {isPending ? "Sealing your reply…" : "Send R.S.V.P."}
+                    </button>
+
+                    <p className="text-center font-display text-sm italic text-ink-soft">
+                        Kindly reply by May 1st
+                    </p>
+                </form>
+            </motion.div>
+        </main>
+    );
+}
+
+/* ── pieces ─────────────────────────────────── */
+
+function Ornament() {
+    return (
+        <div aria-hidden className="mt-6 flex items-center justify-center gap-3">
+            <span className="h-px w-16 bg-line-strong/60" />
+            <span className="text-accent">❦</span>
+            <span className="h-px w-16 bg-line-strong/60" />
+        </div>
+    );
+}
+
+function Field({
+    label, name, placeholder, textarea = false, required = false,
+}: {
+    label: string;
+    name: string;
+    placeholder?: string;
+    textarea?: boolean;
+    required?: boolean;
+}) {
+    const cls =
+        "mt-2 w-full border-b border-line bg-transparent pb-2 font-display text-lg text-ink outline-none transition-colors placeholder:italic placeholder:text-ink-soft/50 focus:border-accent";
+
+    return (
+        <label className="block">
+            <span className="eyebrow text-ink-soft">
+                {label}
+                {!required && <span className="text-ink-soft/60"> · optional</span>}
+            </span>
+            {textarea ? (
+                <textarea name={name} rows={3} placeholder={placeholder} className={`${cls} resize-none`} />
+            ) : (
+                <input name={name} required={required} placeholder={placeholder} className={cls} />
+            )}
+        </label>
+    );
+}
+
+const toggle = (selected: boolean, tone: "accent" | "wine") =>
+    `border py-3 text-center text-[11px] uppercase tracking-[0.25em] transition-colors ${selected
+        ? tone === "accent"
+            ? "border-accent bg-accent text-surface-raised"
+            : "border-wine bg-wine text-surface-raised"
+        : "border-line-strong/60 bg-transparent text-ink hover:border-accent hover:text-accent"
+    }`;
+
+function ThankYou({ attending }: { attending: boolean }) {
+    return (
+        <main className="grid min-h-screen place-items-center px-6">
+            <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center"
+            >
+                <div className="mx-auto grid h-16 w-12 place-items-center rounded-[50%] border border-line-strong bg-surface-raised shadow-[0_8px_18px_-8px_rgba(44,42,34,0.45)]">
+                    <span className="font-monogram text-lg leading-none text-accent">R&amp;C</span>
+                </div>
+                <p className="eyebrow mt-8 text-ink-soft">Reply received</p>
+                <p className="mt-4 font-monogram text-5xl text-accent">Thank you</p>
+                <p className="mx-auto mt-5 max-w-xs font-display text-lg italic leading-relaxed text-ink-soft">
+                    {attending
+                        ? "We are delighted — we look forward to celebrating with you."
+                        : "Your reply has been received with gratitude. You will be dearly missed."}
+                </p>
+                <Ornament />
+                <Link
+                    href="/"
+                    className="eyebrow mt-10 inline-block text-accent underline decoration-line-strong underline-offset-8 transition-colors hover:text-accent-deep"
+                >
+                    Return to the board
+                </Link>
+            </motion.div>
+        </main>
+    );
 }
