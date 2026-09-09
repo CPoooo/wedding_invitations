@@ -7,11 +7,19 @@ import { CollageBoard } from "./CollageBoard";
 
 export function ExperienceGate() {
     const [phase, setPhase] = useState<Phase>("sealed");
+    const [revealed, setRevealed] = useState(false); 
     const sound = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
         document.body.style.overflow = phase === "open" ? "" : "hidden";
         return () => { document.body.style.overflow = ""; };
+    }, [phase]);
+
+    // after the stagger window, later cards appear instantly on scroll
+    useEffect(() => {                               
+        if (phase !== "open") return;
+        const t = setTimeout(() => setRevealed(true), 1200);
+        return () => clearTimeout(t);
     }, [phase]);
 
     const handleOpen = () => {
@@ -35,7 +43,7 @@ export function ExperienceGate() {
                 )}
             </AnimatePresence>
 
-            <CollageBoard open={phase === "open"} />
+            <CollageBoard open={phase === "open"} revealed={revealed} />
         </>
     );
 }
