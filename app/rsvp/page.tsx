@@ -136,8 +136,8 @@ export default function RsvpPage() {
                             transition={{ duration: 0.4 }}
                             className="space-y-8"
                         >
-                            <Field label="Dietary restrictions" name="dietaryRestrictions" placeholder="Share any allergies or needs" />
-                            <Field label="A note for the couple" name="message" placeholder="Leave a few kind words" textarea />
+                            <Field label="Dietary restrictions (optional)" name="dietaryRestrictions" placeholder="Share any allergies or needs" />
+                            <Field label="A note for us (optional)" name="message" placeholder="Leave a few kind words" textarea />
                         </motion.div>
                     )}
 

@@ -73,25 +73,27 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  height: 100vh; /* fallback */
-  height: 100lvh; /* explicit "largest viewport" — wins where supported */
+  width: 100vw;     /* spans the viewport INCLUDING the scrollbar gutter */
+  height: 100vh;
+  height: 100lvh;
   z-index: -2;
   pointer-events: none;
   background-image: url("/images/landscape.jpg");
   background-size: cover;
-  background-position: center; /* bias the focus if needed, e.g. "center 30%" */
+  background-position: center;
 }
 
-/* faint paper grain — lays over the photo, keeps everything tactile
-   (stays inset:0 — a repeating tile doesn't move when its layer resizes) */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;     /* grain covers the gutter too */
+  height: 100vh;
+  height: 100lvh;
   z-index: -1;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.055'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,...");
 }
 
 ::selection {
@@ -125,4 +127,15 @@ body::before {
 /* Tailwind v4 preflight defaults buttons to cursor:default — restore pointer */
 button:not(:disabled) {
   cursor: pointer;
+}
+
+/* reserve the scrollbar gutter permanently — toggling content height
+   (RSVP accept/decline, FAQ accordions, etc.) can no longer resize the
+   viewport or rescale the cover background */
+html {
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
