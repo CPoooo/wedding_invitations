@@ -2,7 +2,7 @@
 [] get er done
 
 # Misc
-[] fix double rendering of "Rachel & Cameron": there is a Rachel & Cameron on both the page.tsx
+[x] fix double rendering of "Rachel & Cameron": there is a Rachel & Cameron on both the page.tsx
 as well as on the envelope message itself. Either replace the envelope one with a different message or something,
 or just hide the Rachel & Cameron that you should see after opening the envelope (until envelope is open, aka should not be viewed from the landing page)
 [] add back arrow in top right corner (circle with arrow)
