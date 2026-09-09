@@ -4,6 +4,7 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { submitRsvp, type RsvpState } from "./actions";
+import { MAX_EXTRA_GUESTS } from "./config";
 
 const rise = (delay: number) => ({
     initial: { opacity: 0, y: 24 },
@@ -17,12 +18,17 @@ export default function RsvpPage() {
         { status: "idle" },
     );
     const [attending, setAttending] = useState<boolean | null>(null);
-    const [guestCount, setGuestCount] = useState(1);
+    // one entry per ADDITIONAL guest; the form-filler is always counted separately
+    const [guests, setGuests] = useState<string[]>([]);
 
     if (state.status === "success") return <ThankYou attending={state.attending} />;
 
-    // plus-one only: guestCount clamps to 1–2, so at most one "Guest 2" field
-    const extras = attending === true ? Math.min(Math.max(guestCount, 1), 2) - 1 : 0;
+    const addGuest = () =>
+        setGuests((g) => (g.length >= MAX_EXTRA_GUESTS ? g : [...g, ""]));
+    const removeGuest = (i: number) =>
+        setGuests((g) => g.filter((_, idx) => idx !== i));
+    const setGuest = (i: number, value: string) =>
+        setGuests((g) => g.map((v, idx) => (idx === i ? value : v)));
 
     return (
         <main className="min-h-screen px-6 py-16 md:py-24">
@@ -45,7 +51,6 @@ export default function RsvpPage() {
                 {...rise(0.15)}
                 className="relative mx-auto mt-8 max-w-lg border border-line-strong/60 bg-surface-raised px-7 py-10 shadow-[0_30px_70px_-40px_rgba(25,23,18,0.45)] md:px-12"
             >
-                {/* inner hairline — the double-rule stationery frame */}
                 <div aria-hidden className="pointer-events-none absolute inset-2 border border-line" />
 
                 <form action={formAction} className="relative space-y-8">
@@ -76,6 +81,7 @@ export default function RsvpPage() {
                         </div>
                     </fieldset>
 
+                    {/* additional guests — add/remove fields, no number entry */}
                     {attending === true && (
                         <motion.div
                             initial={{ opacity: 0, y: 14 }}
@@ -83,24 +89,41 @@ export default function RsvpPage() {
                             transition={{ duration: 0.4 }}
                             className="space-y-8"
                         >
-                            <label className="block">
-                                <span className="eyebrow text-ink-soft">Total guests, including yourself</span>
-                                <input
-                                    name="guestCount"
-                                    type="number"
-                                    min={1}
-                                    max={2}
-                                    value={guestCount}
-                                    onChange={(e) =>
-                                        setGuestCount(Math.min(2, Math.max(1, Number(e.target.value) || 1)))
-                                    }
-                                    className="mt-2 w-24 border-b border-line bg-transparent py-2 text-center font-display text-xl text-ink outline-none transition-colors focus:border-accent"
-                                />
-                            </label>
-
-                            {Array.from({ length: extras }).map((_, i) => (
-                                <Field key={i} label={`Guest ${i + 2}`} name="guestName" placeholder="Full name" />
+                            {guests.map((name, i) => (
+                                <div key={i} className="flex items-end gap-3">
+                                    <div className="flex-1">
+                                        <Field
+                                            label={`Guest ${i + 1}`}
+                                            name="guestName"
+                                            placeholder="Full name"
+                                            value={name}
+                                            onChange={(e) => setGuest(i, e.target.value)}
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => removeGuest(i)}
+                                        aria-label={`Remove guest ${i + 2}`}
+                                        className="mb-2 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line text-lg leading-none text-ink-soft transition-colors hover:border-wine hover:text-wine"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
                             ))}
+
+                            {guests.length < MAX_EXTRA_GUESTS ? (
+                                <button
+                                    type="button"
+                                    onClick={addGuest}
+                                    className="w-full border border-dashed border-line-strong/70 py-3 text-center text-[11px] uppercase tracking-[0.25em] text-ink-soft transition-colors hover:border-accent hover:text-accent"
+                                >
+                                    + Add a guest
+                                </button>
+                            ) : (
+                                <p className="text-center font-display text-sm italic text-ink-soft">
+                                    That&apos;s the whole party — up to {MAX_EXTRA_GUESTS} additional guests, please.
+                                </p>
+                            )}
                         </motion.div>
                     )}
 
@@ -162,13 +185,15 @@ function Ornament() {
 }
 
 function Field({
-    label, name, placeholder, textarea = false, required = false,
+    label, name, placeholder, textarea = false, required = false, value, onChange,
 }: {
     label: string;
     name: string;
     placeholder?: string;
     textarea?: boolean;
     required?: boolean;
+    value?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
     const cls =
         "mt-2 w-full border-b border-line bg-transparent pb-2 font-display text-lg text-ink outline-none transition-colors placeholder:italic placeholder:text-ink-soft/50 focus:border-accent";
@@ -177,12 +202,18 @@ function Field({
         <label className="block">
             <span className="eyebrow text-ink-soft">
                 {label}
-                {!required && <span className="text-ink-soft/60"> · optional</span>}
             </span>
             {textarea ? (
                 <textarea name={name} rows={3} placeholder={placeholder} className={`${cls} resize-none`} />
             ) : (
-                <input name={name} required={required} placeholder={placeholder} className={cls} />
+                <input
+                    name={name}
+                    required={required}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    className={cls}
+                />
             )}
         </label>
     );
@@ -205,7 +236,6 @@ function ThankYou({ attending }: { attending: boolean }) {
                 transition={{ duration: 0.6 }}
                 className="relative w-full max-w-lg border border-line-strong/60 bg-surface-raised px-7 py-16 text-center shadow-[0_30px_70px_-40px_rgba(25,23,18,0.45)] md:px-12"
             >
-                {/* inner hairline — same double-rule frame as the reply card */}
                 <div aria-hidden className="pointer-events-none absolute inset-2 border border-line" />
 
                 <div className="relative">
