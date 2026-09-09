@@ -31,7 +31,7 @@ export default function RsvpPage() {
                     <span className="font-monogram text-lg leading-none text-accent">R&amp;C</span>
                 </div>
                 <p className="eyebrow mt-8 text-ink-soft">Répondez s&apos;il vous plaît</p>
-                <h1 className="mt-3 font-display text-5xl italic text-ink md:text-6xl">
+                <h1 className="mt-3 font-display text-5xl italic text-ink md:text-6xl text-halo">
                     Rachel &amp; Cameron 
                 </h1>
                 <Ornament />
@@ -60,7 +60,7 @@ export default function RsvpPage() {
                                 aria-pressed={attending === true}
                                 className={toggle(attending === true, "accent")}
                             >
-                                Joyfully accepts
+                                Accept
                             </button>
                             <button
                                 type="button"
@@ -68,7 +68,7 @@ export default function RsvpPage() {
                                 aria-pressed={attending === false}
                                 className={toggle(attending === false, "wine")}
                             >
-                                Regretfully declines
+                                Decline
                             </button>
                         </div>
                     </fieldset>

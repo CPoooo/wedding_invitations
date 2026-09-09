@@ -12,7 +12,10 @@ const spring = { type: "spring" as const, stiffness: 110, damping: 14 };
 export function CollageBoard({ open, revealed }: { open: boolean; revealed: boolean }) {
     return (
         <section className="min-h-screen px-6 py-16">
-            <h1 className="mb-10 text-center font-display text-4xl italic text-ink">
+            <h1
+                className={`mb-10 text-center font-display text-4xl italic font-medium text-ink text-halo transition-opacity duration-1000 delay-700 ${open ? "opacity-100" : "opacity-0"
+                    }`}
+            >
                 Rachel &amp; Cameron
             </h1>
             <div className="mx-auto max-w-5xl columns-2 gap-4 md:columns-3">

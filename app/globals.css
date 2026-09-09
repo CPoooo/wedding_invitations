@@ -2,13 +2,12 @@
    OLD MONEY — theme tokens (single source of truth)
 
    HOW TO HOOK IN
-   Every token below generates a Tailwind utility automatically:
-
-     paper      bg-surface · bg-surface-raised · bg-surface-deep
+     paper      bg-surface · bg-surface-raised · bg-surface-deep · bg-surface-sunk
+     wells      bg-well                (neutral photo wells — barely not white)
      ink        text-ink · text-ink-soft
-     green      bg-accent · bg-accent-deep  (hunter green, primary)
-     metal      text-gold · bg-gold         (camel/brass accents)
-     moods      text-wine · bg-wine         (decline, errors)
+     green      bg-accent · bg-accent-deep
+     metal      text-gold · bg-gold
+     moods      text-wine · bg-wine
      hairlines  border-line · border-line-strong
      type       font-display (Cormorant) · font-monogram (Pinyon)
 
@@ -18,14 +17,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── paper ─────────────────────────────── */
-  --color-surface:        #f3efe3;  /* ivory page */
-  --color-surface-raised: #faf7ec;  /* cards, reply card */
-  --color-surface-deep:   #e8e0cb;  /* tweed beige panels */
+  /* ── paper (four-step ramp, lightest → darkest) ── */
+  --color-surface:        #ece4cf;  /* page */
+  --color-surface-raised: #f7f3e8;  /* cards, letter, seal — lightest */
+  --color-surface-deep:   #dcd0b0;  /* panels, envelope body */
+  --color-surface-sunk:   #cdc09c;  /* envelope interior, shadow folds */
 
-  /* ── ink ───────────────────────────────── */
-  --color-ink:      #1d1b14;  /* was #2c2a22 — near-black warm charcoal */
-  --color-ink-soft: #4a4638;  /* was #716c5d — the main "too light" culprit */
+  /* ── photo wells (NEUTRAL — deliberately not beige) ── */
+  --color-well:           #f1f0ec;  /* barely not white */
+
+  /* ── ink (near-black, heavy) ───────────── */
+  --color-ink:      #191712;
+  --color-ink-soft: #3e392c;
 
   /* ── hunter green (primary) ────────────── */
   --color-accent:      #355e5b;
@@ -39,7 +42,7 @@
   --color-line:        #d8cfb8;
   --color-line-strong: #bfb394;
 
-  /* ── typography (wired to next/font) ───── */
+  /* ── typography ────────────────────────── */
   --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-monogram: var(--font-script), "Pinyon Script", cursive;
 }
@@ -47,16 +50,33 @@
 /* ── base ────────────────────────────────── */
 body {
   @apply bg-surface font-display text-ink antialiased;
+  font-weight: 500;
+  font-size: 1.0625rem;
 }
 
-/* faint paper grain — delete this block for flat paper */
+/* ── scene · landscape backdrop ────────────
+   The site's background photo. Sits BELOW the paper grain,
+   ABOVE the ivory canvas (which shows while the image loads).
+   Swap the photo here — components never reference it. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("/images/landscape.jpg");
+  background-size: cover;
+  background-position: center;   /* bias the focus if needed, e.g. "center 30%" */
+}
+
+/* faint paper grain — lays over the photo, keeps everything tactile */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.055'/%3E%3C/svg%3E");
 }
 
 ::selection {
@@ -69,10 +89,20 @@ body::before {
   outline-offset: 3px;
 }
 
-/* ── reusable typographic bit ────────────── */
-/* letterspaced small-caps label, used everywhere */
 @utility eyebrow {
   font-size: 0.6875rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
+}
+
+/* ── legibility over the landscape ─────────
+   Dark ink + a soft paper-colored halo. Apply to any text that
+   sits directly on the photo (letterheads, section titles, CTAs).
+   Content panels stay opaque — they never need this. */
+@utility text-halo {
+  text-shadow:
+    0 1px 1px color-mix(in srgb, var(--color-surface-raised) 90%, transparent),
+    0 0 8px  color-mix(in srgb, var(--color-surface-raised) 80%, transparent),
+    0 0 20px color-mix(in srgb, var(--color-surface-raised) 55%, transparent),
+    0 0 44px color-mix(in srgb, var(--color-surface-raised) 35%, transparent);
 }

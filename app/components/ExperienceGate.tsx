@@ -33,7 +33,7 @@ export function ExperienceGate() {
             <AnimatePresence>
                 {phase !== "open" && (
                     <motion.div
-                        className="fixed inset-0 z-50 grid place-items-center bg-surface"
+                        className="fixed inset-0 z-50 grid place-items-center"
                         exit={{ opacity: 0, y: "-100%" }}
                         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                     >
