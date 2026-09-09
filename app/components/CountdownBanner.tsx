@@ -68,16 +68,16 @@ export function CountdownBanner({ open, revealed }: { open: boolean; revealed: b
         >
             {/* ── hero ─────────────────────────────────── */}
             <div className="text-center text-halo">
-                <p className="text-2xl font-medium uppercase tracking-[0.35em] text-ink md:text-3xl">
+                <p className="text-2xl font-medium uppercase tracking-[0.35em] text-ink md:text-4xl">
                     With love,
                 </p>
                 <p className="mt-3 font-display text-5xl italic font-medium text-ink md:text-7xl">
                     Rachel &amp; Cameron
                 </p>
                 <div aria-hidden className="mt-6 flex items-center justify-center gap-4">
-                    <span className="h-px w-16 bg-ink/50" />
-                    <span className="font-display text-xl italic text-ink md:text-2xl">10 July 2027</span>
-                    <span className="h-px w-16 bg-ink/50" />
+                    <span className="h-px w-16 bg-ink" />
+                    <span className="font-display text-4xl italic text-ink md:text-7xl">10 July 2027</span>
+                    <span className="h-px w-16 bg-ink" />
                 </div>
             </div>
 
@@ -90,11 +90,11 @@ export function CountdownBanner({ open, revealed }: { open: boolean; revealed: b
                 <Lozenge className="-top-5" />
                 <Lozenge className="-bottom-5" />
 
-                <p className="text-center text-lg font-medium uppercase tracking-[0.3em] text-ink md:text-2xl">
+                <p className="text-center text-base font-medium uppercase tracking-[0.3em] text-ink md:text-2xl">
                     Until the big day
                 </p>
 
-                <div className="mt-6 flex items-start justify-center gap-4 md:gap-8">
+                <div className="mt-6 flex items-start justify-center gap-2.5 md:gap-5">
                     <Unit value={p.months} label="Months" />
                     <Colon />
                     <Unit value={p.days} label="Days" />
@@ -112,11 +112,11 @@ export function CountdownBanner({ open, revealed }: { open: boolean; revealed: b
 
 function Unit({ value, label }: { value: number; label: string }) {
     return (
-        <div className="flex w-[2.6ch] flex-col items-center md:w-[3.2ch]">
-            <span className="font-display text-5xl leading-none text-ink tabular-nums md:text-7xl">
+        <div className="flex flex-col items-center">
+            <span className="w-[2ch] text-center font-display text-4xl leading-none text-ink tabular-nums md:w-[3.2ch] md:text-7xl">
                 {pad(value)}
             </span>
-            <span className="mt-3 text-[10px] font-medium uppercase tracking-[0.28em] text-ink">
+            <span className="mt-3 whitespace-nowrap text-[7px] font-medium uppercase tracking-[0.2em] text-ink md:text-[10px] md:tracking-[0.28em]">
                 {label}
             </span>
         </div>
@@ -125,7 +125,7 @@ function Unit({ value, label }: { value: number; label: string }) {
 
 function Colon() {
     return (
-        <span className="mt-0.5 font-display text-4xl leading-none text-gold md:mt-1 md:text-6xl">
+        <span className="mt-0.5 font-display text-3xl leading-none text-gold md:mt-1 md:text-6xl">
             :
         </span>
     );
