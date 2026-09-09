@@ -1,11 +1,5 @@
-import { CollageBoard } from "./components/CollageBoard";
-import { EnvelopeOverlay } from "./components/EnvelopeOverlay";
+import { ExperienceGate } from "./components/ExperienceGate";
 
 export default function Home() {
-  return (
-    <main>
-      <EnvelopeOverlay />
-      <CollageBoard />
-    </main>
-  );
+  return <ExperienceGate />
 }
