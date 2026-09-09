@@ -1,17 +1,45 @@
 "use client";
-import Link from "next/link";
 
-export function RsvpCard({ rotation = 0 }: { rotation?: number }) {
-  return (
-    <div style={{ rotate: `${rotation}deg` }} className="mb-4 break-inside-avoid">
-      <Link
-        href="/rsvp"
-        className="block bg-rose-100 p-3 pb-10 shadow-lg transition-transform hover:scale-[1.03]"
-      >
-        <div className="grid aspect-4/5 w-full place-items-center bg-rose-200 text-center">
-          <p className="font-serif text-xl">RSVP here →</p>
-        </div>
-      </Link>
-    </div>
-  );
+import { useRef } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useReveal } from "./useReveal";
+
+const spring = { type: "spring" as const, stiffness: 110, damping: 14 };
+
+export function RsvpCard({
+    rotation = 0,
+    index,
+    open,
+    revealed,
+}: {
+    rotation?: number;
+    index: number;
+    open: boolean;
+    revealed: boolean;
+}) {
+    const ref = useRef(null);
+    const { visible, delay } = useReveal(ref, { open, revealed, index });
+
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 70, rotate: rotation * 4, scale: 0.92 }}
+            animate={visible
+                ? { opacity: 1, y: 0, rotate: rotation, scale: 1 }
+                : { opacity: 0, y: 70, rotate: rotation * 4, scale: 0.92 }}
+            transition={{ ...spring, delay }}
+            whileHover={{ rotate: 0, scale: 1.05, zIndex: 40 }}
+            className="mb-4 break-inside-avoid"
+        >
+            <Link
+                href="/rsvp"
+                className="block rounded-[6px] bg-rose-100 p-4 shadow-[0_0_0_5px_#fdfcfa,0_12px_28px_rgba(40,35,25,0.22)]"
+            >
+                <div className="grid aspect-[4/5] w-full place-items-center rounded-[3px] bg-rose-200/70 text-center">
+                    <p className="font-cormorant text-2xl italic text-rose-900">RSVP here →</p>
+                </div>
+            </Link>
+        </motion.div>
+    );
 }
