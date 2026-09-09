@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { submitRsvp, type RsvpState } from "./actions";
 import { MAX_EXTRA_GUESTS } from "./config";
+import { BackButton } from "../components/BackButton";
 
 const rise = (delay: number) => ({
     initial: { opacity: 0, y: 24 },
@@ -32,6 +33,7 @@ export default function RsvpPage() {
 
     return (
         <main className="min-h-screen px-6 py-16 md:py-24">
+            <BackButton />
             {/* ── letterhead ─────────────────────────── */}
             <motion.header {...rise(0)} className="mx-auto max-w-lg text-center">
                 <div className="mx-auto grid h-16 w-12 place-items-center rounded-[50%] border border-line-strong bg-surface-raised shadow-[0_8px_18px_-8px_rgba(25,23,18,0.45)]">
