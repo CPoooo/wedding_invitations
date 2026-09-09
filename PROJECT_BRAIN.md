@@ -53,9 +53,8 @@ app/
 ├── rsvp/
 │   ├── page.tsx                # "use client" form; useActionState; stationery design; ThankYou view
 │   └── actions.ts              # "use server" submitRsvp(_prev, formData) → inserts via Drizzle
-└── api/rsvp/route.ts           # DELETED — replaced by server action (recreate only if a task says so, this needs to be deleted but needs admin access on my current machine, which i dont have lol)
-lib/
-├── db.ts                       # Drizzle client for Neon (pre-existing)
+db/
+├── drizzle.ts                       # Drizzle client for Neon (pre-existing)
 └── schema.ts                   # rsvps table (pre-existing)
 public/
 ├── images/                     # sticker PNGs + photos go here
