@@ -140,17 +140,18 @@ export default function RsvpPage() {
                     )}
 
                     {attending === false ? (
-                        <button
-                            type="submit"
-                            disabled={isPending}
-                            className="w-full border border-wine bg-wine p-4 font-display text-lg italic text-surface-raised transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-                        >
-
-                {/* It's okay, we don't judge, well maybe just a little... 😉 put into a p  */}
-                            {isPending
-                                ? "Sealing your reply…"
-                                : "Click to send R.S.V.P"}
-                        </button>
+                        <>
+                            <p className="text-center font-display text-lg italic text-ink">
+                                It&apos;s okay, we don&apos;t judge, well maybe just a little... 😉
+                            </p>
+                            <button
+                                type="submit"
+                                disabled={isPending}
+                                className="eyebrow w-full border border-wine bg-wine py-4 text-surface-raised transition-colors hover:bg-wine-deep disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                                {isPending ? "Sealing your reply…" : "Send R.S.V.P."}
+                            </button>
+                        </>
                     ) : (
                         <button
                             type="submit"
