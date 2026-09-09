@@ -75,8 +75,8 @@ export function Envelope({
 
             {/* ── the envelope ────────────────────────────── */}
             <div className="relative mt-8 aspect-[10/7] w-[min(430px,84vw)]">
-                {/* z-0 · ground shadow */}
-                <div className="absolute inset-x-8 bottom-0 z-0 h-8 translate-y-4 rounded-[50%] bg-ink/30 blur-xl" />
+                {/* z-0 · ground shadow — softer, so the envelope melts into the board */}
+                <div className="absolute inset-x-6 -bottom-3 z-0 h-6 rounded-[50%] bg-ink/15 blur-lg" />
 
                 {/* z-10 · back panel (interior — dark, seen when flap opens) */}
                 <div className="absolute inset-0 z-10 rounded-[3px] bg-surface-sunk" />

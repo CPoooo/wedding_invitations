@@ -22,8 +22,8 @@ export function CollageBoard({ open, revealed }: { open: boolean; revealed: bool
         <section className="min-h-screen px-6 py-16">
             <OpenedEnvelope open={open} revealed={revealed} />
 
-            {/* dense two-column board */}
-            <div className="mx-auto mt-16 flex max-w-3xl items-start gap-4">
+            {/* dense two-column board — pulled up so the envelope reads as part of the board */}
+            <div className="mx-auto -mt-6 flex max-w-3xl items-start gap-4">
                 <div className="flex w-1/2 flex-col">
                     {left.map(({ item, i }) => <BoardItem key={item.id} item={item} index={i} open={open} revealed={revealed} />)}
                 </div>

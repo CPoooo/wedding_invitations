@@ -64,7 +64,7 @@ export function CountdownBanner({ open, revealed }: { open: boolean; revealed: b
             initial={{ opacity: 0, y: 60 }}
             animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
             transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-            className="-mx-6 mt-20 px-6 py-16"
+            className="-mx-6 mt-8 px-6 py-16"
         >
             {/* ── hero ─────────────────────────────────── */}
             <div className="text-center text-halo">
