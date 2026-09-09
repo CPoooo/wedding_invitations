@@ -12,7 +12,9 @@ const spring = { type: "spring" as const, stiffness: 110, damping: 14 };
 export function CollageBoard({ open, revealed }: { open: boolean; revealed: boolean }) {
     return (
         <section className="min-h-screen px-6 py-16">
-            <h1 className="mb-10 text-center font-serif text-4xl">Rachel &amp; Cameron</h1>
+            <h1 className="mb-10 text-center font-display text-4xl italic text-ink">
+                Rachel &amp; Cameron
+            </h1>
             <div className="mx-auto max-w-5xl columns-2 gap-4 md:columns-3">
                 {collageItems.map((item, i) => {
                     if (item.kind === "rsvp") {

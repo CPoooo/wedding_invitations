@@ -24,8 +24,8 @@
   --color-surface-deep:   #e8e0cb;  /* tweed beige panels */
 
   /* ── ink ───────────────────────────────── */
-  --color-ink:      #2c2a22;
-  --color-ink-soft: #716c5d;
+  --color-ink:      #1d1b14;  /* was #2c2a22 — near-black warm charcoal */
+  --color-ink-soft: #4a4638;  /* was #716c5d — the main "too light" culprit */
 
   /* ── hunter green (primary) ────────────── */
   --color-accent:      #355e5b;

@@ -34,10 +34,10 @@ export function RsvpCard({
         >
             <Link
                 href="/rsvp"
-                className="block rounded-[6px] bg-rose-100 p-4 shadow-[0_0_0_5px_#fdfcfa,0_12px_28px_rgba(40,35,25,0.22)]"
+                className="block rounded-[6px] bg-accent/10 p-4 shadow-[0_0_0_5px_var(--color-surface-raised),0_12px_28px_rgba(44,42,34,0.22)]"
             >
-                <div className="grid aspect-[4/5] w-full place-items-center rounded-[3px] bg-rose-200/70 text-center">
-                    <p className="font-cormorant text-2xl italic text-rose-900">RSVP here →</p>
+                <div className="grid aspect-[4/5] w-full place-items-center rounded-[3px] bg-accent/20 text-center">
+                    <p className="font-display text-2xl italic text-accent-deep">RSVP here →</p>
                 </div>
             </Link>
         </motion.div>
