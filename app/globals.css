@@ -117,3 +117,8 @@ body::before {
     0 0 20px color-mix(in srgb, var(--color-surface-raised) 55%, transparent),
     0 0 44px color-mix(in srgb, var(--color-surface-raised) 35%, transparent);
 }
+
+/* Tailwind v4 preflight defaults buttons to cursor:default — restore pointer */
+button:not(:disabled) {
+  cursor: pointer;
+}

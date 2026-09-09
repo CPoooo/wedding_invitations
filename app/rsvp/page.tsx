@@ -223,11 +223,13 @@ function Field({
 }
 
 const toggle = (selected: boolean, tone: "accent" | "wine") =>
-    `border py-3 text-center text-[11px] uppercase tracking-[0.25em] transition-colors ${selected
+    `border py-3 text-center text-[11px] uppercase tracking-[0.25em] transition-colors hover:cursor-pointer ${selected
         ? tone === "accent"
             ? "border-accent bg-accent text-surface-raised"
             : "border-wine bg-wine text-surface-raised"
-        : "border-line-strong/60 bg-transparent text-ink hover:border-accent hover:text-accent"
+        : tone === "accent"
+            ? "border-line-strong/60 bg-transparent text-ink hover:border-accent hover:text-accent"
+            : "border-wine/40 bg-transparent text-ink hover:border-wine hover:text-wine"
     }`;
 
 function ThankYou({ attending }: { attending: boolean }) {
