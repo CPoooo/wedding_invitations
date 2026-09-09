@@ -7,18 +7,14 @@ import { RsvpCard } from "./RsvpCard";
 import { useReveal } from "./useReveal";
 import { collageItems, type StickerItem } from "./collageItems";
 import { CountdownBanner } from "./CountdownBanner";
+import { OpenedEnvelope } from "./OpenedEnvelope";
 
 const spring = { type: "spring" as const, stiffness: 110, damping: 14 };
 
 export function CollageBoard({ open, revealed }: { open: boolean; revealed: boolean }) {
     return (
         <section className="min-h-screen px-6 py-16">
-            <h1
-                className={`mb-10 text-center font-display text-4xl md:text-7xl italic font-medium text-ink text-halo transition-opacity duration-1000 delay-700 ${open ? "opacity-100" : "opacity-0"
-                    }`}
-            >
-                Rachel &amp; Cameron
-            </h1>
+            <OpenedEnvelope open={open} revealed={revealed} />
             <div className="mx-auto max-w-5xl columns-2 gap-4 md:columns-3">
                 {collageItems.map((item, i) => {
                     if (item.kind === "rsvp") {
@@ -30,7 +26,7 @@ export function CollageBoard({ open, revealed }: { open: boolean; revealed: bool
                     return <CollageCard key={item.id} item={item} index={i} open={open} revealed={revealed} />;
                 })}
             </div>
-            <CountdownBanner open={open} revealed={revealed}/>
+            <CountdownBanner open={open} revealed={revealed} />
         </section>
     );
 }
