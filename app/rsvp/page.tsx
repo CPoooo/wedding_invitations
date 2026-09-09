@@ -145,9 +145,11 @@ export default function RsvpPage() {
                             disabled={isPending}
                             className="w-full border border-wine bg-wine p-4 font-display text-lg italic text-surface-raised transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
                         >
+
+                {/* It's okay, we don't judge, well maybe just a little... 😉 put into a p  */}
                             {isPending
                                 ? "Sealing your reply…"
-                                : "It's okay, we don't judge, well maybe just a little... 😉"}
+                                : "Click to send R.S.V.P"}
                         </button>
                     ) : (
                         <button

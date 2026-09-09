@@ -57,11 +57,20 @@ body {
 /* ── scene · landscape backdrop ────────────
    The site's background photo. Sits BELOW the paper grain,
    ABOVE the ivory canvas (which shows while the image loads).
-   Swap the photo here — components never reference it. */
+   Swap the photo here — components never reference it.
+
+   MOBILE: sized with a CONSTANT height, not inset:0 — inset tracks
+   the dynamic viewport, so the collapsing URL bar rescales the
+   cover image on every scroll. vh/lvh measure the LARGEST viewport,
+   so the height never changes and the photo never jumps. */
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;    /* fallback */
+  height: 100lvh;   /* explicit "largest viewport" — wins where supported */
   z-index: -2;
   pointer-events: none;
   background-image: url("/images/landscape.jpg");
@@ -69,7 +78,8 @@ body::after {
   background-position: center;   /* bias the focus if needed, e.g. "center 30%" */
 }
 
-/* faint paper grain — lays over the photo, keeps everything tactile */
+/* faint paper grain — lays over the photo, keeps everything tactile
+   (stays inset:0 — a repeating tile doesn't move when its layer resizes) */
 body::before {
   content: "";
   position: fixed;
