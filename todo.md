@@ -19,6 +19,7 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [] find music to play on card open (or just sound "open.mp3" in public AND add music to play when user clicks the record player component)
 [] once envelope is open there should be an open envelope (duh) with an actual wedding invitation poking out of it
 [] all components holding pictures in them should be detailed with wedding themed items (flowers, bows, etc..)
+[] on mobile (probably on desktop too) background image jumps around when scrolling up or down
 
 # More components to add
 [] our story component
