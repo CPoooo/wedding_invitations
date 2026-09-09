@@ -4,19 +4,12 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useReveal } from "./useReveal";
+import { alignCls, type RsvpItem } from "./collageItems";
 
 const spring = { type: "spring" as const, stiffness: 110, damping: 14 };
 
-export function RsvpCard({
-    rotation = 0,
-    index,
-    open,
-    revealed,
-}: {
-    rotation?: number;
-    index: number;
-    open: boolean;
-    revealed: boolean;
+export function RsvpCard({ item, index, open, revealed }: {
+    item: RsvpItem; index: number; open: boolean; revealed: boolean;
 }) {
     const ref = useRef(null);
     const { visible, delay } = useReveal(ref, { open, revealed, index });
@@ -24,13 +17,13 @@ export function RsvpCard({
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 70, rotate: rotation * 4, scale: 0.92 }}
+            initial={{ opacity: 0, y: 70, rotate: item.rotation * 4, scale: 0.92 }}
             animate={visible
-                ? { opacity: 1, y: 0, rotate: rotation, scale: 1 }
-                : { opacity: 0, y: 70, rotate: rotation * 4, scale: 0.92 }}
+                ? { opacity: 1, y: 0, rotate: item.rotation, scale: 1 }
+                : { opacity: 0, y: 70, rotate: item.rotation * 4, scale: 0.92 }}
             transition={{ ...spring, delay }}
             whileHover={{ rotate: 0, scale: 1.05, zIndex: 40 }}
-            className="mb-4 break-inside-avoid"
+            className={`relative mb-0 ${alignCls[item.align]} ${item.mt ?? "mt-6"} ${item.z ?? ""} ${item.width}`}
         >
             <Link
                 href="/rsvp"

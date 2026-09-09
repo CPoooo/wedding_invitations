@@ -1,9 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useReveal } from "./useReveal";
-import { useRef } from "react"
+import { alignCls, type BadgeItem } from "./collageItems";
 
 /* n semicircular bulges around a circle — the scalloped seal silhouette */
 function scallopPath(n: number, R: number, cx = 100, cy = 100) {
@@ -11,7 +12,7 @@ function scallopPath(n: number, R: number, cx = 100, cy = 100) {
         const a = (i / n) * Math.PI * 2 - Math.PI / 2;
         return [cx + R * Math.cos(a), cy + R * Math.sin(a)] as const;
     });
-    const r = R * Math.sin(Math.PI / n); // half-chord → perfect semicircle scallops
+    const r = R * Math.sin(Math.PI / n);
     let d = `M ${pts[0][0].toFixed(2)} ${pts[0][1].toFixed(2)}`;
     for (let i = 1; i <= n; i++) {
         const [x, y] = pts[i % n];
@@ -21,26 +22,10 @@ function scallopPath(n: number, R: number, cx = 100, cy = 100) {
 }
 
 const OUTER = scallopPath(14, 96);
-const INNER = scallopPath(14, 87); // hairline ring inside the edge
+const INNER = scallopPath(14, 87);
 
-export function SectionBadge({
-    kicker,   // small italic word — "The" / "Our Love" / "Frequently Asked"
-    title,    // the big word — "Details" / "Story" / "Questions"
-    href,
-    rotation = 0,
-    index,
-    open,
-    revealed,
-    className = "", // placement + overlap knobs from the parent
-}: {
-    kicker: string;
-    title: string;
-    href: string;
-    rotation?: number;
-    index: number;
-    open: boolean;
-    revealed: boolean;
-    className?: string;
+export function SectionBadge({ item, index, open, revealed }: {
+    item: BadgeItem; index: number; open: boolean; revealed: boolean;
 }) {
     const ref = useRef(null);
     const { visible, delay } = useReveal(ref, { open, revealed, index });
@@ -48,18 +33,19 @@ export function SectionBadge({
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, scale: 0.7, rotate: rotation * 3 }}
+            initial={{ opacity: 0, scale: 0.7, rotate: item.rotation * 3 }}
             animate={visible
-                ? { opacity: 1, scale: 1, rotate: rotation }
-                : { opacity: 0, scale: 0.7, rotate: rotation * 3 }}
+                ? { opacity: 1, scale: 1, rotate: item.rotation }
+                : { opacity: 0, scale: 0.7, rotate: item.rotation * 3 }}
             transition={{ type: "spring", stiffness: 110, damping: 14, delay }}
             whileHover={{ scale: 1.06, rotate: 0, zIndex: 50 }}
-            className={`relative ${className}`}
+            className={`relative ${alignCls[item.align]} ${item.mt ?? "mt-6"} ${item.z ?? ""}`}
         >
-            <Link href={href} className="group relative block w-44 md:w-52" aria-label={`${kicker} ${title}`}>
-                {/* optional garnish slot — e.g. a bow PNG from Canva:
-                <img src="/images/sticker-bow.png" alt="" className="absolute -top-6 left-1/2 z-10 w-16 -translate-x-1/2 -rotate-12" />
-                */}
+            <Link
+                href={item.href}
+                aria-label={`${item.kicker} ${item.title}`}
+                className="group relative block w-44 md:w-52"
+            >
                 <svg viewBox="0 0 200 200" className="block w-full drop-shadow-[0_14px_24px_rgba(25,23,18,0.3)]">
                     <path d={OUTER} className="fill-sage transition-colors duration-300 group-hover:fill-sage-deep" />
                     <path d={INNER} fill="none" stroke="var(--color-surface-raised)" strokeOpacity="0.55" strokeWidth="1.5" />
@@ -67,10 +53,10 @@ export function SectionBadge({
                 <span className="absolute inset-0 grid place-items-center px-6 text-center">
                     <span>
                         <span className="block font-display text-xl italic leading-none text-surface-raised">
-                            {kicker}
+                            {item.kicker}
                         </span>
                         <span className="mt-1 block font-display text-4xl font-semibold italic leading-none text-surface-raised md:text-5xl">
-                            {title}
+                            {item.title}
                         </span>
                         <span className="mt-3 block text-[9px] font-medium uppercase tracking-[0.3em] text-surface-raised/80 transition-colors group-hover:text-surface-raised">
                             Click here

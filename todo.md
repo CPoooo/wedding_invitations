@@ -39,6 +39,7 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [x] countdown component that is live and counting down 
 
 # RSVP Page
+[] when clicking between decline and accept the wallpaper resizes and has layout jank
 [x] RSVP page aesthetics and form needs to be completed
 [x] user can rsvp and this is persisted in neon
 [] test functionality of this page and see if any other fields need to be added
