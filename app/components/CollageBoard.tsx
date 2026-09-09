@@ -6,6 +6,7 @@ import { CollageCard } from "./CollageCard";
 import { RsvpCard } from "./RsvpCard";
 import { useReveal } from "./useReveal";
 import { collageItems, type StickerItem } from "./collageItems";
+import { CountdownBanner } from "./CountdownBanner";
 
 const spring = { type: "spring" as const, stiffness: 110, damping: 14 };
 
@@ -29,6 +30,7 @@ export function CollageBoard({ open, revealed }: { open: boolean; revealed: bool
                     return <CollageCard key={item.id} item={item} index={i} open={open} revealed={revealed} />;
                 })}
             </div>
+            <CountdownBanner open={open} revealed={revealed}/>
         </section>
     );
 }

@@ -15,11 +15,14 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [x] components need to fade in as user scrolls
 [] remove vercel .svgs in public 
 [] find music to play on card open (or just sound "open.mp3" in public AND add music to play when user clicks the record player component)
+[] once envelope is open there should be an open envelope (duh) with an actual wedding invitation poking out of it
+[] all components holding pictures in them should be detailed with wedding themed items (flowers, bows, etc..)
 
 # More components to add
 [] our story component
 [] frequently asked questions component
-[] more details component? (if different then FAQ)
+[] "THE DETAILS" component: will have all the details of the wedding itself. Location, time, attire, theme, etc... 
+    [] could even include "ask a question section" - emails Rachel & I the question? 
 [] song component that is a record? 
 [] countdown component that is live and counting down 
 
@@ -36,3 +39,10 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [] Entire makeover of the ui until Rachel's approval (old money/wedding vibe aesthetic)
     [x] step 1: get globals.css setup with ui theme
     [] step 2: 
+
+# Email Service
+[] need email service to update Rachel & I when an RSVP is made
+
+# Deploy to Vercel
+[] testing on both desktop on mobile
+[] production build hosted on Vercel
