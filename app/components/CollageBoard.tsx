@@ -14,7 +14,7 @@ export function CollageBoard({ open, revealed }: { open: boolean; revealed: bool
     return (
         <section className="min-h-screen px-6 py-16">
             <h1
-                className={`mb-10 text-center font-display text-4xl italic font-medium text-ink text-halo transition-opacity duration-1000 delay-700 ${open ? "opacity-100" : "opacity-0"
+                className={`mb-10 text-center font-display text-4xl md:text-7xl italic font-medium text-ink text-halo transition-opacity duration-1000 delay-700 ${open ? "opacity-100" : "opacity-0"
                     }`}
             >
                 Rachel &amp; Cameron

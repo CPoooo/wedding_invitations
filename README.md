@@ -7,6 +7,10 @@ What dev pays someone else to do their wedding invitation website pshhhhhhhh. We
 If you wish to run the repo yourself. You can pull the repo and run (if you need more instructions you probably shouldn't be here XD):   
 
 ``` bash
+npm i
+```
+
+``` bash
 npm run dev
 ```
 
