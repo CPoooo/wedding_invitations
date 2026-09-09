@@ -4,7 +4,6 @@
 # brain
 [] update project brain
 
-
 # Guest list
 SOLVED WITH GATEWAY AND PASSWORD WE WILL SEND TO PEOPLE OURSELVES
     - users that have logged in with the password will not be required to enter the password again until 30 days later
@@ -19,10 +18,11 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [x] add back arrow in top right corner (circle with arrow)
 [] get real collage images (looks like urweddingbestie examples)
 [] move images closer and overlap more
+[] add flowers to image holding containers
 [x] add better typography to get same aesthetic
 [x] initial envelope should look like a real envelope
     IMPORTANT:
-    [] OPEN LIKE A REAL ENVELOPE (animation when clicked - just slides as of now, which doesnt look bad but might not be the EXACT animation we are going for)
+    [x] OPEN LIKE A REAL ENVELOPE (animation when clicked - just slides as of now, which doesnt look bad but might not be the EXACT animation we are going for)
 
 [x] better font on front page (much more elegant)
 [x] components need to fade in as user scrolls
@@ -46,14 +46,14 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [x] countdown component that is live and counting down 
 
 # RSVP Page
-[] when clicking between decline and accept the wallpaper resizes and has layout jank
+[x] when clicking between decline and accept the wallpaper resizes and has layout jank
 [x] RSVP page aesthetics and form needs to be completed
 [x] user can rsvp and this is persisted in neon
-[] test functionality of this page and see if any other fields need to be added
-[] when user adds a plus one (or guests) they see "guest 2" and not guest 1
+[x] test functionality of this page and see if any other fields need to be added
+[x] when user adds a plus one (or guests) they see "guest 2" and not guest 1
     [] this should likely just be a plus one anyways, so constrain to a plus one? 
-[] when user clicks decline they can still see diet restrictions and a note for the couple
-[] update reply by to ____ (get this from Rachel)
+[x] when user clicks decline they can still see diet restrictions and a note for the couple
+[] update reply by date (get this from Rachel)
 
 # UI NEEDS TO BE PERFECT (elegant/old money/wedding vibes)
 [] Entire makeover of the ui until Rachel's approval (old money/wedding vibe aesthetic)
