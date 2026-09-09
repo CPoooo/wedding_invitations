@@ -1,6 +1,10 @@
 # Todoooooo
 [] get er done
 
+# Guest list
+[] only users that are only Rachel and I's guest list should be allowed into the website
+[] can do this with a preset list in the db possibly by name or email, or we can just send the email with the website link out to everyone on our list we make via email, and they just put in a default password we give them, something like 'supercoolpasswordtopoolwedding2027'
+
 # Misc
 [x] fix double rendering of "Rachel & Cameron": there is a Rachel & Cameron on both the page.tsx
 as well as on the envelope message itself. Either replace the envelope one with a different message or something,
@@ -22,11 +26,15 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [] on mobile (probably on desktop too) background image jumps around when scrolling up or down
 
 # More components to add
+[] Registry (where should this go - in details or its own component)
 [] "THE DETAILS" component: will have all the details of the wedding itself. Location, time, attire, theme, etc... 
+    [] initialized
     [] could even include "ask a question section" - emails Rachel & I the question? 
     [] details
 [] our story
+    [] initialized
 [] FAQ
+    [] initialized
 [] song component that is a record? 
 [x] countdown component that is live and counting down 
 
@@ -48,5 +56,5 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [] need email service to update Rachel & I when an RSVP is made
 
 # Deploy to Vercel
-[] testing on both desktop on mobile
-[] production build hosted on Vercel
+[x] testing on both desktop on mobile
+[] ONLY ONCE FULLY COMPLETE AND TESTED -> production build hosted on Vercel
