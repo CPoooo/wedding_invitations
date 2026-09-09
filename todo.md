@@ -26,6 +26,7 @@
 [] when user adds a plus one (or guests) they see "guest 2" and not guest 1
     [] this should likely just be a plus one anyways, so constrain to a plus one? 
 [] when user clicks decline they can still see diet restrictions and a note for the couple
+[] update reply by to ____ (get this from Rachel)
 
 # UI NEEDS TO BE PERFECT (elegant/old money/wedding vibes)
 [] Entire makeover of the ui until Rachel's approval (old money/wedding vibe aesthetic)
