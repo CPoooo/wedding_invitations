@@ -62,7 +62,7 @@ export function OpenedEnvelope({ open, revealed }: { open: boolean; revealed: bo
             {/* z-30 · the pocket — same face/colors as the closed envelope's front,
                with the classic V-notch where the card emerges */}
             <div
-                className="relative z-30 aspect-[10/6.8] bg-gradient-to-b from-surface-deep to-surface-sunk shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]"
+                className="relative z-30 aspect-[10/6.8] bg-gradient-to-b from-surface via-surface-raised to-surface-deep shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]"
                 style={{ clipPath: "polygon(0 0, 50% 26%, 100% 0, 100% 100%, 0 100%)" }}
             >
                 {/* interior depth — darkens the notch where the card slides in */}

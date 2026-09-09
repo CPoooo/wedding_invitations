@@ -84,8 +84,8 @@ export function Envelope({
                 {/* z-20 · the letter — hidden for now, slides out later */}
                 <div className="absolute inset-x-6 top-8 bottom-6 z-20 rounded-[2px] bg-surface-raised shadow-sm" />
 
-                {/* z-30 · front face — darker at the bottom for depth */}
-                <div className="absolute inset-0 z-30 rounded-[3px] bg-gradient-to-b from-surface-deep to-surface-sunk shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]" />
+                {/* z-30 · front face — RSVP palette: light catches the middle, deepens downward */}
+                <div className="absolute inset-0 z-30 rounded-[3px] bg-gradient-to-b from-surface via-surface-raised to-surface-deep shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]" />
 
                 {/* z-40 · flap — lighter than the front, catching light from above */}
                 <div
@@ -95,10 +95,10 @@ export function Envelope({
                     <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.55),transparent_38%),linear-gradient(245deg,rgba(120,110,95,0.12),transparent_38%)]" />
                 </div>
 
-                {/* z-50 · seal */}
+                {/* z-50 · seal — wine wax, matching the reply envelope */}
                 <div className="absolute top-[58%] left-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
-                    <div className="grid h-[4.75rem] w-[3.6rem] -rotate-4 place-items-center rounded-[50%] border border-line-strong bg-surface-raised shadow-[0_2px_8px_rgba(25,23,18,0.35)]">
-                        <span className="font-monogram text-[1.35rem] leading-none text-accent">
+                    <div className="grid h-14 w-14 place-items-center rounded-full bg-wine shadow-[inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-3px_4px_rgba(0,0,0,0.4),0_2px_5px_rgba(25,23,18,0.4)] transition-transform duration-300 group-hover:scale-110">
+                        <span className="font-monogram text-sm leading-none text-surface-raised">
                             R&amp;C
                         </span>
                     </div>
