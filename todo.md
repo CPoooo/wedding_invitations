@@ -6,8 +6,10 @@
 
 
 # Guest list
-[] only users that are only Rachel and I's guest list should be allowed into the website
-[] can do this with a preset list in the db possibly by name or email, or we can just send the email with the website link out to everyone on our list we make via email, and they just put in a default password we give them, something like 'supercoolpasswordtopoolwedding2027'
+SOLVED WITH GATEWAY AND PASSWORD WE WILL SEND TO PEOPLE OURSELVES
+    - users that have logged in with the password will not be required to enter the password again until 30 days later
+[x] only users that are only Rachel and I's guest list should be allowed into the website
+[x] can do this with a preset list in the db possibly by name or email, or we can just send the email with the website link out to everyone on our list we make via email, and they just put in a default password we give them, something like 'supercoolpasswordtopoolwedding2027'
 
 # Misc
 [] update favicon
@@ -24,11 +26,11 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 
 [x] better font on front page (much more elegant)
 [x] components need to fade in as user scrolls
-[] remove vercel .svgs in public 
+[x] remove vercel .svgs in public 
 [] find music to play on card open (or just sound "open.mp3" in public AND add music to play when user clicks the record player component)
-[] once envelope is open there should be an open envelope (duh) with an actual wedding invitation poking out of it
+[x] once envelope is open there should be an open envelope (duh) with an actual wedding invitation poking out of it
 [] all components holding pictures in them should be detailed with wedding themed items (flowers, bows, etc..)
-[] on mobile (probably on desktop too) background image jumps around when scrolling up or down
+[x] on mobile (probably on desktop too) background image jumps around when scrolling up or down
 
 # More components to add
 [] Registry (where should this go - in details or its own component)
