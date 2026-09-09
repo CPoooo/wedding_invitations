@@ -10,7 +10,9 @@ or just hide the Rachel & Cameron that you should see after opening the envelope
 [] move images closer and overlap more
 [x] add better typography to get same aesthetic
 [x] initial envelope should look like a real envelope
-    [] open like a real envelope (animation when clicked - just slides as of now, which doesnt look bad but might not be the EXACT animation we are going for)
+    IMPORTANT:
+    [] OPEN LIKE A REAL ENVELOPE (animation when clicked - just slides as of now, which doesnt look bad but might not be the EXACT animation we are going for)
+
 [x] better font on front page (much more elegant)
 [x] components need to fade in as user scrolls
 [] remove vercel .svgs in public 
